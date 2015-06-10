@@ -1,89 +1,102 @@
-$(function () {
+// Model
 
-  var num1         =  0,
-	    num2         =  0,
-	    answer       =  0,
-      operation    =  '+',
-      $num1Incr    =  $('#number1 button:eq(0)'),
-      $num1Decr    =  $('#number1 button:eq(1)'),
-      $num1Display =  $('#number1 h2'),
-      $num2Incr    =  $('#number2 button:eq(0)'),
-      $num2Decr    =  $('#number2 button:eq(1)'),
-      $num2Display =  $('#number2 h2'),
-      $add         =  $('#add'),
-      $sub         =  $('#sub'),
-      $mult        =  $('#mult'),
-      $div         =  $('#div'),
-      $operation   =  $('#operation'),
-      $equals      =  $('#equals'),
-      $result      =  $('#result');
+function Calc() {
+  this.view = new CalcView(this);
+  this.view.init();
+}
+Calc.prototype.num1 = 0;
+Calc.prototype.num2 = 0;
+Calc.prototype.operation = '+';
 
-  function print(sel, value) {
-    sel.text(value);
-  }
+// View
 
-	$num1Incr.click(function () {
-		num1 += 1;
-		print($num1Display, num1);
+function CalcView(model) {
+  this.model = model;
+}
+CalcView.prototype.el = {
+  $num1Incr    :  $('#number1 button:eq(0)'),
+  $num1Decr    :  $('#number1 button:eq(1)'),
+  $num1Display :  $('#number1 h2'),
+  $num2Incr    :  $('#number2 button:eq(0)'),
+  $num2Decr    :  $('#number2 button:eq(1)'),
+  $num2Display :  $('#number2 h2'),
+  $add         :  $('#add'),
+  $sub         :  $('#sub'),
+  $mult        :  $('#mult'),
+  $div         :  $('#div'),
+  $operation   :  $('#operation'),
+  $equals      :  $('#equals'),
+  $result      :  $('#result')
+};
+CalcView.prototype.printVal = function(sel, value) {
+  sel.text(value);
+};
+CalcView.prototype.init = function () {
+
+  var self = this;
+
+  this.el.$num1Incr.click(function () {
+    self.model.num1 += 1;
+    self.printVal(self.el.$num1Display, self.model.num1);
   });
 
-  $num1Decr.click(function () {
-    if (num1 > 0) {
-		  num1 -= 1;
-		  print($num1Display, num1);
+  this.el.$num1Decr.click(function () {
+    if (self.model.num1 > 0) {
+      self.model.num1 -= 1;
+      self.printVal(self.el.$num1Display, self.model.num1);
     }
   });
 
-  $num2Incr.click(function () {
-  	num2 += 1;
-  	print($num2Display, num2);
+  this.el.$num2Incr.click(function () {
+    self.model.num2 += 1;
+    self.printVal(self.el.$num2Display, self.model.num2);
   });
 
-  $num2Decr.click(function () {
-  	if (num2 > 0) {
-  		num2 -= 1;
-  		print($num2Display, num2);
-  	}
+  this.el.$num2Decr.click(function () {
+    if (self.model.num2 > 0) {
+      self.model.num2 -= 1;
+      self.printVal(self.el.$num2Display, self.model.num2);
+    }
   });
 
-
-  $add.click(function () {
-    operation = '+';
-  	print($operation, operation);
+  this.el.$add.click(function () {
+    self.model.operation = '+';
+    self.printVal(self.el.$operation, self.model.operation);
   });
 
-  $sub.click(function () {
-    operation = '-';
-    print($operation, operation);
+  this.el.$sub.click(function () {
+    self.model.operation = '-';
+    self.printVal(self.el.$operation, self.model.operation);
   });
 
-  $mult.click(function () {
-    operation = '*';
-    print($operation, operation);
+  this.el.$mult.click(function () {
+    self.model.operation = '*';
+    self.printVal(self.el.$operation, self.model.operation);
   });
 
-  $div.click(function () {
-    operation = '/';
-    print($operation, operation);
+  this.el.$div.click(function () {
+    self.model.operation = '/';
+    self.printVal(self.el.$operation, self.model.operation);
   });
 
-  $equals.click(function () {
-    if (operation === "+") { 
-    	answer = num1 + num2; 
-    	print($result, answer); 
+  this.el.$equals.click(function () {
+    if (self.model.operation === "+") { 
+      self.printVal(self.el.$result, self.model.num1 + self.model.num2); 
     }   
-    else if (operation === "-") { 
-    	answer = num1 - num2; 
-    	print($result, answer); 
+    else if (self.model.operation === "-") { 
+      self.printVal(self.el.$result, self.model.num1 - self.model.num2); 
     }
-    else if (operation === "*") { 
-    	answer = num1 * num2; 
-    	print($result, answer); 
+    else if (self.model.operation === "*") { 
+      self.printVal(self.el.$result, self.model.num1 * self.model.num2); 
     }
-    else if (operation === "/") { 
-    	answer = num1 / num2; 
-    	print($result, answer);
+    else if (self.model.operation === "/") { 
+      self.printVal(self.el.$result, self.model.num1 / self.model.num2);
     }
   }); 
+}
 
+// Initialize
+
+$(function () {
+  var calc = new Calc();
 });
