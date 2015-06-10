@@ -3,24 +3,24 @@
 var app = {};
 app.calcModule = (function () {
 
-      var num1 = 0,
-          num2 = 0, 
-          operation = '+',
-          el = {
-            $num1Incr    :  $('#number1 button:eq(0)'),
-            $num1Decr    :  $('#number1 button:eq(1)'),
-            $num1Display :  $('#number1 h2'),
-            $num2Incr    :  $('#number2 button:eq(0)'),
-            $num2Decr    :  $('#number2 button:eq(1)'),
-            $num2Display :  $('#number2 h2'),
-            $add         :  $('#add'),
-            $sub         :  $('#sub'),
-            $mult        :  $('#mult'),
-            $div         :  $('#div'),
-            $operation   :  $('#operation'),
-            $equals      :  $('#equals'),
-            $result      :  $('#result')
-          };
+  var num1 = 0,
+      num2 = 0, 
+      operation = '+',
+      el = {
+        $num1Incr    :  $('#number1 button:eq(0)'),
+        $num1Decr    :  $('#number1 button:eq(1)'),
+        $num1Display :  $('#number1 h2'),
+        $num2Incr    :  $('#number2 button:eq(0)'),
+        $num2Decr    :  $('#number2 button:eq(1)'),
+        $num2Display :  $('#number2 h2'),
+        $add         :  $('#add'),
+        $sub         :  $('#sub'),
+        $mult        :  $('#mult'),
+        $div         :  $('#div'),
+        $operation   :  $('#operation'),
+        $equals      :  $('#equals'),
+        $result      :  $('#result')
+      };
 
   function printVal(sel, value) {
     sel.text(value);
