@@ -76,8 +76,8 @@ $(function(){
 
     });
 
-      // OPTION FOR RESULT USING SWITCH STATEMENT 
-
+    //   OPTION FOR RESULT USING SWITCH STATEMENT 
+  // $('#equals').click(function(){  
     // switch(operation) {
     //   case '+': answer = counterOne + counterTwo; $('#result').text(answer); break;
     //   case '-': answer = counterOne - counterTwo; $('#result').text(answer); break;
@@ -85,8 +85,9 @@ $(function(){
     //   case '/': answer = counterOne / counterTwo; $('#result').text(answer); break;
     //   default : answer = NaN; $('#result').text(answer);
     // }
+    // });
   
-     // OPTION FOR RESULT USING IF ELSE STATEMENT
+    //  OPTION FOR RESULT USING IF ELSE STATEMENT
 
   $('#equals').click(function(){  
   if (operation = "+") { // calculate based on the operator
