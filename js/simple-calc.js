@@ -1,102 +1,100 @@
-// Model
+// Module
 
-function Calc() {
-  this.view = new CalcView(this);
-  this.view.init();
-}
-Calc.prototype.num1 = 0;
-Calc.prototype.num2 = 0;
-Calc.prototype.operation = '+';
+var app = {};
+app.calcModule = (function () {
 
-// View
+      var num1 = 0,
+          num2 = 0, 
+          operation = '+',
+          el = {
+            $num1Incr    :  $('#number1 button:eq(0)'),
+            $num1Decr    :  $('#number1 button:eq(1)'),
+            $num1Display :  $('#number1 h2'),
+            $num2Incr    :  $('#number2 button:eq(0)'),
+            $num2Decr    :  $('#number2 button:eq(1)'),
+            $num2Display :  $('#number2 h2'),
+            $add         :  $('#add'),
+            $sub         :  $('#sub'),
+            $mult        :  $('#mult'),
+            $div         :  $('#div'),
+            $operation   :  $('#operation'),
+            $equals      :  $('#equals'),
+            $result      :  $('#result')
+          };
 
-function CalcView(model) {
-  this.model = model;
-}
-CalcView.prototype.el = {
-  $num1Incr    :  $('#number1 button:eq(0)'),
-  $num1Decr    :  $('#number1 button:eq(1)'),
-  $num1Display :  $('#number1 h2'),
-  $num2Incr    :  $('#number2 button:eq(0)'),
-  $num2Decr    :  $('#number2 button:eq(1)'),
-  $num2Display :  $('#number2 h2'),
-  $add         :  $('#add'),
-  $sub         :  $('#sub'),
-  $mult        :  $('#mult'),
-  $div         :  $('#div'),
-  $operation   :  $('#operation'),
-  $equals      :  $('#equals'),
-  $result      :  $('#result')
-};
-CalcView.prototype.printVal = function(sel, value) {
-  sel.text(value);
-};
-CalcView.prototype.init = function () {
+  function printVal(sel, value) {
+    sel.text(value);
+  }
 
-  var self = this;
+  function initialize() {
 
-  this.el.$num1Incr.click(function () {
-    self.model.num1 += 1;
-    self.printVal(self.el.$num1Display, self.model.num1);
-  });
+    el.$num1Incr.click(function () {
+      num1 += 1;
+      printVal(el.$num1Display, num1);
+    });
 
-  this.el.$num1Decr.click(function () {
-    if (self.model.num1 > 0) {
-      self.model.num1 -= 1;
-      self.printVal(self.el.$num1Display, self.model.num1);
-    }
-  });
+    el.$num1Decr.click(function () {
+      if (num1 > 0) {
+        num1 -= 1;
+        printVal(el.$num1Display, num1);
+      }
+    });
 
-  this.el.$num2Incr.click(function () {
-    self.model.num2 += 1;
-    self.printVal(self.el.$num2Display, self.model.num2);
-  });
+    el.$num2Incr.click(function () {
+      num2 += 1;
+      printVal(el.$num2Display, num2);
+    });
 
-  this.el.$num2Decr.click(function () {
-    if (self.model.num2 > 0) {
-      self.model.num2 -= 1;
-      self.printVal(self.el.$num2Display, self.model.num2);
-    }
-  });
+    el.$num2Decr.click(function () {
+      if (num2 > 0) {
+        num2 -= 1;
+        printVal(el.$num2Display, num2);
+      }
+    });
 
-  this.el.$add.click(function () {
-    self.model.operation = '+';
-    self.printVal(self.el.$operation, self.model.operation);
-  });
+    el.$add.click(function () {
+      operation = '+';
+      printVal(el.$operation, operation);
+    });
 
-  this.el.$sub.click(function () {
-    self.model.operation = '-';
-    self.printVal(self.el.$operation, self.model.operation);
-  });
+    el.$sub.click(function () {
+      operation = '-';
+      printVal(el.$operation, operation);
+    });
 
-  this.el.$mult.click(function () {
-    self.model.operation = '*';
-    self.printVal(self.el.$operation, self.model.operation);
-  });
+    el.$mult.click(function () {
+      operation = '*';
+      printVal(el.$operation, operation);
+    });
 
-  this.el.$div.click(function () {
-    self.model.operation = '/';
-    self.printVal(self.el.$operation, self.model.operation);
-  });
+    el.$div.click(function () {
+      operation = '/';
+      printVal(el.$operation, operation);
+    });
 
-  this.el.$equals.click(function () {
-    if (self.model.operation === "+") { 
-      self.printVal(self.el.$result, self.model.num1 + self.model.num2); 
-    }   
-    else if (self.model.operation === "-") { 
-      self.printVal(self.el.$result, self.model.num1 - self.model.num2); 
-    }
-    else if (self.model.operation === "*") { 
-      self.printVal(self.el.$result, self.model.num1 * self.model.num2); 
-    }
-    else if (self.model.operation === "/") { 
-      self.printVal(self.el.$result, self.model.num1 / self.model.num2);
-    }
-  }); 
-}
+    el.$equals.click(function () {
+      if (operation === "+") { 
+        printVal(el.$result, num1 + num2); 
+      }   
+      else if (operation === "-") { 
+        printVal(el.$result, num1 - num2); 
+      }
+      else if (operation === "*") { 
+        printVal(el.$result, num1 * num2); 
+      }
+      else if (operation === "/") { 
+        printVal(el.$result, num1 / num2);
+      }
+    }); 
+  }
+
+  return {
+    init: initialize
+  }
+})();
 
 // Initialize
 
 $(function () {
-  var calc = new Calc();
+  app.calcModule.init();
 });
